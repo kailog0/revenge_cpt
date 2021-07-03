@@ -4,6 +4,8 @@
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     </head>
     <body>
+      <%= link_to 'ログイン', login_path %>
+      <%= link_to 'ログアウト', logout_path, method: :delete %>
         <div id="app">
             <h2>一週間前に解いた問題</h2>
             <div>
