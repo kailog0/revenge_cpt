@@ -6,21 +6,23 @@
     <body>
       <%= link_to 'ログイン', login_path %>
       <%= link_to 'ログアウト', logout_path, method: :delete %>
-        <div id="app">
-            <h2>一週間前に解いた問題</h2>
-            <div>
-                <table-component></table-component>
-            </div>
+      <div id="app">
+        <confirm-url-component></confirm-url-component> 
+        <div>
+          <h2>一週間前に解いた問題</h2>
+          <div>
+            <table-component></table-component>
+          </div>
         </div>
         <div>
-            <h2>一ヵ月前に解いた問題</h2>
-            <div>
-            </div>
+          <h2>一ヵ月前に解いた問題</h2>
+          <div>
+          </div>
         </div>
         <div>
-            <h2>半年前に解いた問題</h2>
-
+          <h2>半年前に解いた問題</h2>
         </div>
+      </div>
         <script>
           Vue.component('table-component', {
               data: function() {
@@ -52,9 +54,37 @@
               this.get_tasks()
             },
           })
-let s =             new Vue({
-                el: '#app'
-            })
+          Vue.component('confirm-url-component', {
+            data: function() {
+              return {
+                url: "",
+              }
+            },
+            template: '\
+              <div>\
+                <input v-model="url">\
+                <button @click="confirm_url">確認</button>\
+              </div>',
+            methods: {
+              confirm_url: function() {
+                let url = this.url
+                const params = {'url': this.url}
+                axios
+                  .post('http://localhost:3000/tasks', params)
+                  .then(function(response) {
+                    console.log(response.data.message)
+                  })
+                  .catch(function(response) {
+                    console.log(response)
+                  })
+                  .finally(function(response) {
+                  })
+              }
+            },
+          })
+          let s = new Vue({
+            el: '#app',
+          })
         </script>
         <style>
             table {width: 500px; border-collapse:collapse }
