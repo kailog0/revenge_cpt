@@ -20,7 +20,7 @@ class TasksController < ApplicationController
     task = Task.new(url: params[:url], user_id: current_user.id, status: 0)
     tasks_count = Task.where(user_id: current_user).count
     error_messages = []
-    if TASK_UPPER_LIMIT =< tasks_count 
+    if TASK_UPPER_LIMIT <= tasks_count 
       error_messages.push(ErrorHelper::TASK_UPPER_LIMIT_ERROR_MESSAGE)
     end
 
