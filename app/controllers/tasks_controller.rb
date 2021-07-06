@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   protect_from_forgery except: :create
 
-  TASK_UPPER_LIMIT = 5000;
+  TASK_UPPER_LIMIT = 50;
 
   def index
     render json: {tasks: [
@@ -20,14 +20,14 @@ class TasksController < ApplicationController
     task = Task.new(url: params[:url], user_id: current_user.id, status: 0)
     tasks_count = Task.where(user_id: current_user).count
     error_messages = []
-    if TASK_UPPER_LIMIT >= tasks_count 
+    if TASK_UPPER_LIMIT =< tasks_count 
       error_messages.push(ErrorHelper::TASK_UPPER_LIMIT_ERROR_MESSAGE)
     end
 
     if TASK_UPPER_LIMIT > tasks_count && task.save
       render json: {'message': '登録完了'}, status: 200
     else
-      head :bad_request
+      render json: {'messages': ['a', 'b']}, status: 400
     end
   end
 end
