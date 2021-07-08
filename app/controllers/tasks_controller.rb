@@ -4,11 +4,8 @@ class TasksController < ApplicationController
   TASK_UPPER_LIMIT = 50;
 
   def index
-    render json: {tasks: [
-                 {"id": 1, "url": "https://kai2020.blog"},
-                 {"id": 2, "url": "https://kai2020.blog"},
-                 {"id": 3, "url": "https://kai2020.blog"},
-    ]}
+    tasks = Task.where(user_id: current_user.id).where(status: params[:solved_status])
+    render json: tasks
   end
 
   def show
@@ -24,7 +21,7 @@ class TasksController < ApplicationController
       error_messages.push(ErrorHelper::TASK_UPPER_LIMIT_ERROR_MESSAGE)
     end
 
-    if TASK_UPPER_LIMIT > tasks_count && task.save
+    if TASK_UPPER_LIMIT <= tasks_count && task.save
       render json: {'message': '登録完了'}, status: 200
     else
       render json: {'messages': ['a', 'b']}, status: 400

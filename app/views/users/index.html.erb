@@ -11,20 +11,27 @@
         <div>
           <h2>一週間前に解いた問題</h2>
           <div>
-            <table-component></table-component>
+            <table-component :solved_status="0" :x_days_ago="30"></table-component>
           </div>
         </div>
         <div>
           <h2>一ヵ月前に解いた問題</h2>
+            <table-component :solved_status="1" :x_days_ago="30"></table-component>
           <div>
           </div>
         </div>
         <div>
           <h2>半年前に解いた問題</h2>
+            <table-component :solved_status="2" :x_days_ago="30"></table-component>
         </div>
       </div>
         <script>
           Vue.component('table-component', {
+              props: {
+                solved_status: Number,
+                x_days_ago: Number,
+
+              },
               data: function() {
                 return {tasks: []}
               },
@@ -42,11 +49,18 @@
                 console.log(task_id)
               },
               get_tasks: function() {
-                self = this
+                const self = this
+                const params = {
+                  solved_status: this.solved_status,
+                  x_days_ago: this.x_days_ago,
+                }
                 axios
-                  .get("http://localhost:3000/tasks")
+                  .get(
+                    `http://localhost:3000/tasks?solved_status=${this.solved_status}&x_days_ago=${this.x_days_ago}`,
+                    params
+                  )
                   .then(function(response) {
-                    self.tasks = response.data.tasks
+                    self.tasks = response.data
                   })
               },
             },
