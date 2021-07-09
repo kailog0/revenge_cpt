@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  protect_from_forgery except: :create
+  protect_from_forgery except: [:create, :update]
 
   TASK_UPPER_LIMIT = 50;
 
@@ -26,5 +26,21 @@ class TasksController < ApplicationController
     else
       render json: {'messages': ['a', 'b']}, status: 400
     end
+  end
+
+  def update
+    task = Task.find(params[:id])
+
+    if task.update(status: params[:status])
+      render json: {'message': '更新完了しました。'}, status: 201 
+    else
+      render json: {'message': '登録に失敗しました。'}, status: 400
+    end
+  end
+
+  private
+
+  def task_params
+    params.require(:task).permit(:url, :status)
   end
 end
