@@ -3,3 +3,14 @@ inherit_from: .rubocop_todo.yml
 AllCops:
     NewCops: enable
 
+Style/IfUnlessModifier:
+    Enabled: false
+
+Metrics/MethodLength:
+    Enabled: false
+
+ClassAndModuleChildren:
+    Enabled: false
+
+Documentation:
+    Enabled: false

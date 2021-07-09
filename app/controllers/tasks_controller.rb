@@ -21,7 +21,7 @@ class TasksController < ApplicationController
     tasks_count = Task.where(user_id: current_user).count
     error_messages = []
     if TASK_UPPER_LIMIT <= tasks_count
-      error_messages.push(ErrorHelper::TASK_UPPER_LIMIT_ERROR_MESSAGE) 
+      error_messages.push(ErrorHelper::TASK_UPPER_LIMIT_ERROR_MESSAGE)
     end
 
     if TASK_UPPER_LIMIT <= tasks_count && task.save
