@@ -40,13 +40,33 @@
                  <tr><th>No.</th><th>task</th><th></th></tr>\
                  <tr v-for="(task, index) in tasks" :key="task.id">\
                    <td>{{ index + 1}}</td>\
-                   <td><a :href="task.url">Hydrate</a></a></td>\
-                   <td><button @click="delete_task(task.id)">AC</button></td>\
+                    <td><a :href="task.url">{{  task.url }}</a></a></td>\
+                   <td><button @click="update_task(task)">AC</button></td>\
                  </tr>\
               </table>',
             methods: {
-              delete_task: function(task_id) {
-                console.log(task_id)
+              update_task: function(task) {
+                const self = this
+                const params = {
+                  'id': task.id,
+                  'status': task.status + 1,
+                }
+                axios
+                  .put(
+                      `http://localhost:3000/tasks/${task.id}`,
+                      params
+                  )
+                  .then(function(response) {
+                    console.log(response.data.message)
+                    self.tasks = self.tasks.filter(target => target.id != task.id)
+                  })
+                  .catch(function(error) {
+                    console.log('更新失敗')
+                    console.log(error.response)
+                  })
+                  .finally(function() {
+                    console.log('put-finally')
+                  })
               },
               get_tasks: function() {
                 const self = this
@@ -102,6 +122,9 @@
                       self.error_messages.push(message)
                       console.log(message)
                     })
+                  })
+                  .catch(function(error) {
+                    console.log(error)
                   })
                   .finally(function(response) {
                   })
