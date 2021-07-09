@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddUserIdToTasks < ActiveRecord::Migration[6.0]
   def up
     execute 'DELETE FROM tasks;'
