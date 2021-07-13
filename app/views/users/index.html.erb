@@ -4,9 +4,35 @@
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     </head>
     <body>
-      <%= link_to 'ログイン', login_path %>
-      <%= link_to 'ログアウト', logout_path, method: :delete %>
+      <header>
+        <nav>
+          <div>
+            <%= link_to 'revenge_cpt', logout_path %>
+          </div>
+          <div>
+            <% if current_user %>
+              <%= link_to 'ログアウト', logout_path, method: :delete %>
+            <% elsif %>
+              <%= link_to 'ログイン', login_path %>
+            <% end %>
+          </div>
+        </nav>
+      </header>
       <div id="app">
+        <div class="task-groups">
+          <div class="task-group-one-week">
+            <button>one week<section>10</section></button>
+          </div>
+          <div class="task-group-one-month">
+            <button>one month<section>10</section></button>
+          </div>
+          <div class="task-group-half-a-year">
+            <button>half a year<section>10</section</button>
+          </div>
+          <div class="task-group-today-ac">
+            <button>today AC<section>10/100</section</button>
+          </div>
+        </div>
         <confirm-url-component></confirm-url-component> 
         <div>
           <h2>一週間前に解いた問題</h2>
