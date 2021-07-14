@@ -1,10 +1,10 @@
 <template>
     <table class="tasks-table">
         <tr><th class="tasks-table-th">No.</th><th class="tasks-table-th">task</th><th class="tasks-table-th"></th></tr>
-        <tr v-for="(task, index) in tasks" :key="task.id" :class="'tasks-table-tr-' + (index % 2 == 0 ? 'even' : 'odd')">
-        <td class="tasks-table-td">{{ index + 1}}</td>
-        <td class="tasks-table-td"><a :href="task.url">{{  task.url }}</a></a></td>
-        <td><button class="tasks-table-button" @click="update_task(task)">AC</button></td>
+        <tr v-for="(task, index) in tasks" :key="task.id">
+        <td class="tasks-table-td" :class="'tasks-table-td-' + (index % 2 ? 'even' : 'odd')">{{ index + 1}}</td>
+        <td class="tasks-table-td" :class="'tasks-table-td-' + (index % 2 ? 'even' : 'odd')"><a :href="task.url">{{  task.url }}</a></a></td>
+        <td :class="'tasks-table-td-' + (index % 2 ? 'even' : 'odd')"><button class="tasks-table-button" @click="update_task(task)">AC</button></td>
         </tr>
     </table>
 </template>
@@ -79,13 +79,17 @@ export default {
     .tasks-table > tr {
 	height: 40px;
     }
+    .tasks-table-tr-odd {
+        color: blue;
+    }
     .tasks-table-td {
 	text-align: center;
+	color: red;
 	vertical-align: middle;
 	border: 1px solid black;
     }
-    .tasks-table-tr-odd {
-    	background-color: #ddd;
+    .tasks-table-td-odd {
+    	background-color: black;
     }
     .tasks-table-button {
 	height: 28px;
