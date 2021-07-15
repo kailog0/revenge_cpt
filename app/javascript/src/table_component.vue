@@ -65,6 +65,7 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (min-width: 1024px) {
    .tasks-table {
 	margin-top: 20px;
 	width: 800px;	
@@ -95,4 +96,5 @@ export default {
 	border: 1px solid black;
 	margin-top: 6px;
     }
+}
 </style>
