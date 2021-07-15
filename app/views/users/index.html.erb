@@ -21,13 +21,13 @@
       <div id="app">
         <div class="task-groups">
           <div class="task-group-one-week">
-            <button>one week<section>10</section></button>
+            <button @click="switchComponent(0)">one week<section>10</section></button>
           </div>
           <div class="task-group-one-month">
-            <button>one month<section>10</section></button>
+            <button @click="switchComponent(1)">one month<section>10</section></button>
           </div>
           <div class="task-group-half-a-year">
-            <button>half a year<section>10</section</button>
+            <button @click="switchComponent(2)">half a year<section>10</section</button>
           </div>
           <div class="task-group-today-ac">
             <button>today AC<section>10/100</section</button>
@@ -36,16 +36,10 @@
         <confirm-url-component></confirm-url-component> 
         <div>
           <div>
-            <table-component :solved_status="0" :x_days_ago="30"></table-component>
+            <table-component key="one~week" v-if="show_component[0]" :solved_status="0" :x_days_ago="30" ></table-component>
+            <table-component key="one-month" v-else-if="show_component[1]" :solved_status="1" :x_days_ago="30" ></table-component>
+            <table-component key="half-a-year" v-else-if="show_component[2]" :solved_status="2" :x_days_ago="30"></table-component>
           </div>
-        </div>
-        <div>
-          <table-component :solved_status="1" :x_days_ago="30"></table-component>
-          <div>
-          </div>
-        </div>
-        <div>
-          <table-component :solved_status="2" :x_days_ago="30"></table-component>
         </div>
       </div>
         <style>
