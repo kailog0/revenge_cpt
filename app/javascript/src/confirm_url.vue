@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div class="confirm-main-box">
         <div v-if="error_messages.length">
             <p v-for="(error_message, index) in error_messages" :key="index">{{ error_message }} </p>
         </div>
-        <div>
-            <input v-model="url">
-            <button @click="confirm_url">確認</button>
+        <div class="confirm-sub-box">
+            <input class="confirm-input" v-model="url">
+            <button class="confirm-button" @click="confirm_url">確認</button>
         </div>
     </div>
 </template>
@@ -46,3 +46,35 @@ export default {
 }
 </script>
 
+<style scoped>
+@media screen and (min-width: 1024px) {
+    .confirm-main-box {
+        margin-top: 16px;
+    }
+    .confirm-sub-box {
+	width: 760px;
+	height: 40px;
+        display: flex;
+	justify-content: space-around;
+        align-items: center;
+    }
+    .confirm-input {
+	height: 32px;
+	width: 640px;
+        border: 1px solid black;
+    }
+    .confirm-button {
+	font-size: 20px;
+	height: 32px;
+	width: 56px;
+	color: black;
+	background-color: rgb(200, 200, 200);
+	text-align: center;
+	border-bottom-left-radius: 5%;
+	border-bottom-right-radius: 5%;
+	border-top-left-radius: 5%;
+	border-top-right-radius: 5%;
+    }
+}
+
+</style>
