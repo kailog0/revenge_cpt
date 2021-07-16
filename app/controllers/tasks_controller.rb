@@ -6,8 +6,19 @@ class TasksController < ApplicationController
   TASK_UPPER_LIMIT = 50
 
   def index
-    tasks = Task.where(user_id: current_user.id).where(status: params[:solved_status])
-    render json: tasks
+    if params[:solved_status].blank?
+      render json: { message: "solved_statusパラメーターを指定してください。" }, status: 400
+    elsif params[:from_x_days_ago].blank?
+      render json: { message: "from_x_days_agoパラメーターを指定してください。" }, status: 400
+    elsif params[:to_y_days_ago].blank?
+      render json: { message: "to_y_days_agoパラメーターを指定してください。" }, status: 400
+    else
+      today = Time.zone.now
+      from_day = Time.zone.parse((today - params[:from_x_days_ago].to_i.day).strftime("%F"))
+      to_day = Time.zone.parse((today - params[:to_y_days_ago].to_i.-(1).day).strftime("%F"))
+      tasks = Task.where(user_id: current_user.id).where(status: params[:solved_status]).where(updated_at: from_day...to_day)
+      render json: tasks
+    end
   end
 
   def show
