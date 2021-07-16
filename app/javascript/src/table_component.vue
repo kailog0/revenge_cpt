@@ -13,7 +13,8 @@
 export default {
     props: {
         solved_status: Number,
-        x_days_ago: Number,
+        from_x_days_ago: Number,
+	to_y_days_ago: Number,
     },
     data: function() {
         return {tasks: []}
@@ -46,12 +47,12 @@ export default {
         const self = this
         const params = {
             solved_status: this.solved_status,
-            x_days_ago: this.x_days_ago,
+            from_x_days_ago: this.from_x_days_ago,
+	    to_y_days_ago: this.to_y_days_ago,
         }
         axios
             .get(
-            `http://localhost:3000/tasks?solved_status=${this.solved_status}&x_days_ago=${this.x_days_ago}`,
-            params
+            `http://localhost:3000/tasks?solved_status=${this.solved_status}&from_x_days_ago=${this.from_x_days_ago}&to_y_days_ago=${this.to_y_days_ago}` 
             )
             .then(function(response) {
             self.tasks = response.data

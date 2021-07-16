@@ -6,7 +6,10 @@ class TasksController < ApplicationController
   TASK_UPPER_LIMIT = 50
 
   def index
-    tasks = Task.where(user_id: current_user.id).where(status: params[:solved_status])
+    today = Time.zone.now;
+    from_day = Time.zone.parse((today - params[:from_x_days_ago].to_i.day).strftime("%F"))
+    to_day = Time.zone.parse((today - params[:to_y_days_ago].to_i.-(1).day).strftime("%F"))
+    tasks = Task.where(user_id: current_user.id).where(status: params[:solved_status]).where(updated_at: from_day...to_day)
     render json: tasks
   end
 

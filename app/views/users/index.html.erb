@@ -21,24 +21,24 @@
       <div id="app">
         <div class="task-groups">
           <div class="task-group-one-week">
-            <button @click="switchComponent(0)">one week<section>10</section></button>
+            <button @click="switchComponent(0)">one week</button>
           </div>
           <div class="task-group-one-month">
-            <button @click="switchComponent(1)">one month<section>10</section></button>
+            <button @click="switchComponent(1)">one mont</button>
           </div>
           <div class="task-group-half-a-year">
-            <button @click="switchComponent(2)">half a year<section>10</section</button>
+            <button @click="switchComponent(2)">half a year</button>
           </div>
           <div class="task-group-today-ac">
-            <button>today AC<section>10/100</section</button>
+            <button>today AC</button>
           </div>
         </div>
         <confirm-url-component></confirm-url-component> 
         <div>
           <div>
-            <table-component key="one~week" v-if="show_component[0]" :solved_status="0" :x_days_ago="30" ></table-component>
-            <table-component key="one-month" v-else-if="show_component[1]" :solved_status="1" :x_days_ago="30" ></table-component>
-            <table-component key="half-a-year" v-else-if="show_component[2]" :solved_status="2" :x_days_ago="30"></table-component>
+            <table-component key="one~week" v-if="show_component[0]" :solved_status="0" :from_x_days_ago="9" :to_y_days_ago="7"></table-component>
+            <table-component key="one-month" v-else-if="show_component[1]" :solved_status="1" :from_x_days_ago="40" :to_y_days_ago="30"></table-component>
+            <table-component key="half-a-year" v-else-if="show_component[2]" :solved_status="2" :from_x_days_ago="200" :to_y_days_ago="180"></table-component>
           </div>
         </div>
       </div>
