@@ -14,7 +14,7 @@ export default {
     props: {
         solved_status: Number,
         from_x_days_ago: Number,
-	to_y_days_ago: Number,
+        to_y_days_ago: Number,
     },
     data: function() {
         return {tasks: []}
@@ -48,7 +48,7 @@ export default {
         const params = {
             solved_status: this.solved_status,
             from_x_days_ago: this.from_x_days_ago,
-	    to_y_days_ago: this.to_y_days_ago,
+            to_y_days_ago: this.to_y_days_ago,
         }
         axios
             .get(
