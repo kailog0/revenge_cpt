@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 801px) {
     .confirm-main-box {
         margin-top: 16px;
     }
@@ -67,9 +67,11 @@ export default {
 	font-size: 20px;
 	height: 32px;
 	width: 56px;
+        margin-left: 4px;
 	color: black;
 	background-color: rgb(200, 200, 200);
 	text-align: center;
+        border: 1px solid black;
 	border-bottom-left-radius: 5%;
 	border-bottom-right-radius: 5%;
 	border-top-left-radius: 5%;
@@ -77,4 +79,68 @@ export default {
     }
 }
 
+@media screen and (max-width: 800px) and (min-width: 561px) {
+    .confirm-main-box {
+        margin-top: 16px;
+    }
+    .confirm-sub-box {
+        width: 540px;
+        height: 40px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .confirm-input {
+        height: 32px;
+        width: 640px;
+        border: 1px solid black;
+    }
+    .confirm-button {
+        font-size: 20px;
+        height: 32px;
+        width: 56px;
+        margin-left: 4px;
+        color: black;
+        background-color: rgb(200, 200, 200);
+        text-align: center;
+        border: 1px solid black;
+        border-bottom-left-radius: 5%;
+        border-bottom-right-radius: 5%;
+        border-top-left-radius: 5%;
+        border-top-right-radius: 5%;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .confirm-main-box {
+        margin-top: 16px;
+    }
+    .confirm-sub-box {
+        width: 360px;
+        height: 32px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+    }
+    .confirm-input {
+        height: 32px;
+        width: 360px;
+        border: 1px solid black;
+    }
+    .confirm-button {
+        font-size: 20px;
+        height: 32px;
+        width: 100%;
+        margin-top: 4px;
+        color: black;
+        background-color: rgb(200, 200, 200);
+        text-align: center;
+        border: 1px solid black;
+        border-bottom-left-radius: 5%;
+        border-bottom-right-radius: 5%;
+        border-top-left-radius: 5%;
+        border-top-right-radius: 5%;
+    }
+}
 </style>

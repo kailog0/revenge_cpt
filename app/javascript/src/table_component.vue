@@ -2,9 +2,9 @@
     <table class="tasks-table">
         <tr><th class="tasks-table-th">No.</th><th class="tasks-table-th">task</th><th class="tasks-table-th"></th></tr>
         <tr v-for="(task, index) in tasks" :key="task.id" :class="'tasks-table-tr-' + (index % 2 == 0 ? 'even' : 'odd')">
-        <td class="tasks-table-td">{{ index + 1}}</td>
+        <td class="tasks-table-td tasks-table-td-index">{{ index + 1}}</td>
         <td class="tasks-table-td"><a :href="task.url">{{  task.url }}</a></a></td>
-        <td><button class="tasks-table-button" @click="update_task(task)">AC</button></td>
+        <td class="tasks-table-td tasks-table-td-button"><button class="tasks-table-button" @click="update_task(task)">AC</button></td>
         </tr>
     </table>
 </template>
@@ -66,7 +66,7 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 801px) {
    .tasks-table {
 	margin-top: 20px;
 	width: 800px;	
@@ -80,14 +80,21 @@ export default {
     }
     .tasks-table > tr {
 	height: 40px;
+        text-align: center;
     }
     .tasks-table-td {
-	text-align: center;
 	vertical-align: middle;
 	border: 1px solid black;
+        word-break: break-all;
     }
     .tasks-table-tr-odd {
     	background-color: #ddd;
+    }
+    .tasks-table-td-index {
+        width: 40px;
+    }
+    .tasks-table-td-button {
+	width: 60px;
     }
     .tasks-table-button {
 	height: 28px;
@@ -95,7 +102,84 @@ export default {
 	color: white;
 	background-color: #5cb85c;
 	border: 1px solid black;
-	margin-top: 6px;
+    }
+}
+
+@media screen and (max-width:800px) and (min-width:561px) {
+   .tasks-table {
+        margin-top: 20px;
+        width: 540px;
+    }
+    .tasks-table-th {
+        text-align: center;
+        vertical-align: middle;
+        background-color: #5cb85c;
+        border: 1px solid black;
+
+    }
+    .tasks-table > tr {
+        height: 40px;
+        text-align: center;
+    }
+    .tasks-table-td {
+        vertical-align: middle;
+        border: 1px solid black;
+        word-break: break-all;
+    }
+    .tasks-table-tr-odd {
+        background-color: #ddd;
+    }
+    .tasks-table-td-index {
+        width: 40px;
+    }
+    .tasks-table-td-button {
+        width: 60px;
+    }
+    .tasks-table-button {
+        height: 28px;
+        width: 36px;
+        color: white;
+        background-color: #5cb85c;
+        border: 1px solid black;
+    }
+}
+
+@media screen and (max-width: 560px) {
+   .tasks-table {
+        margin-top: 24px;
+        width: 360px;
+    }
+    .tasks-table-th {
+        text-align: center;
+        vertical-align: middle;
+        background-color: #5cb85c;
+        border: 1px solid black;
+
+    }
+    .tasks-table > tr {
+        height: 40px;
+        text-align: center;
+    }
+    .tasks-table-td {
+        vertical-align: middle;
+        border: 1px solid black;
+        word-break: break-all;
+    }
+    .tasks-table-tr-odd {
+        background-color: #ddd;
+    }
+    .tasks-table-td-index {
+        width: 40px;
+    }
+    .tasks-table-td-button {
+        width: 60px;
+    }
+    .tasks-table-button {
+        height: 28px;
+        width: 36px;
+        color: white;
+        background-color: #5cb85c;
+        border: 1px solid black;
     }
 }
 </style>

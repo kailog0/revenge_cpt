@@ -1,4 +1,4 @@
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 801px) {
 	header {
 		position: fixed;
 		height: 100px;
@@ -6,6 +6,8 @@
 		background-color: rgb(13, 13, 13, 1);
 	}
 	header > nav {
+		margin-left: 20px;
+		margin-right: 20px;
 		display: flex;
 		justify-content: space-between;
 		
@@ -14,9 +16,6 @@
 		padding-top: 38px;
 		font-size: 24px;
 		color: white;
-	}
-	button {
-		color: red;
 	}
 	#app {
 		padding-top: 140px;
@@ -53,3 +52,114 @@
 		border-bottom-right-radius: 5%;
 	}
 }
+
+@media screen and (min-width: 561px) and (max-width: 800px) {
+        header {
+                position: fixed;
+                height: 80px;
+                width: 100%;
+                background-color: rgb(13, 13, 13, 1);
+        }
+        header > nav {
+		margin-left: 20px;
+		margin-right: 20px;
+                display: flex;
+                justify-content: space-between;
+
+        }
+        header > nav > div {
+                padding-top: 27px;
+                font-size: 22px;
+                color: white;
+        }
+        #app {
+                padding-top: 110px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+        }
+        .task-groups {
+                width: 540px;
+                height: 56px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-around;
+        }
+        .task-group-one-week, .task-group-one-month, .task-group-half-a-year, .task-group-today-ac {
+                color: white;
+                font-size: 20px;
+                background-color: rgb(101, 101, 101, 0.9);
+                flex-basis: 25%;
+                display: flex;
+                justify-content: space-around;
+                text-align: center;
+                border-top: 1px solid black;
+                border-bottom: 1px solid black;
+                border-left: 1px solid black;
+        }
+        .task-group-one-week {
+                border-top-left-radius: 5%;
+                border-bottom-left-radius: 5%;
+        }
+        .task-group-today-ac {
+                border-right: 1px solid black;
+                border-top-right-radius: 5%;
+                border-bottom-right-radius: 5%;
+        }
+}
+
+@media screen and (max-width: 560px) {
+        header {
+                position: fixed;
+                height: 40px;
+                width: 100%;
+                background-color: rgb(13, 13, 13, 1);
+        }
+        header > nav {
+                margin-left: 20px;
+                margin-right: 20px;
+                display: flex;
+                justify-content: space-between;
+
+        }
+        header > nav > div {
+                padding-top: 12px;
+                font-size: 16px;
+                color: white;
+        }
+        #app {
+                padding-top: 56px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+        }
+        .task-groups {
+                width: 380px;
+                height: 120px;
+                margin: 0 auto;
+                display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+        }
+        .task-group-one-week, .task-group-one-month, .task-group-half-a-year, .task-group-today-ac {
+                color: white;
+                font-size: 20px;
+                background-color: rgb(101, 101, 101, 0.9);
+                flex-basis: 25%;
+                text-align: center;
+                border-top: 1px solid black;
+                border-bottom: 1px solid black;
+                border-left: 1px solid black;
+        }
+        .task-group-one-week {
+                border-top-left-radius: 5%;
+                border-bottom-left-radius: 5%;
+        }
+        .task-group-today-ac {
+                border-right: 1px solid black;
+                border-top-right-radius: 5%;
+                border-bottom-right-radius: 5%;
+        }
+
+}
+
