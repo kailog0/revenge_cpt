@@ -41,4 +41,38 @@ RSpec.describe "TasksApis", type: :request do
       end
     end
   end
+
+  describe 'POST /tasks_api' do
+    context 'logging in' do
+      before do
+        @user = FactoryBot.create(:user)
+        post login_path, params: { session: { name: @user.name, password: @user.password } }
+      end
+
+      it "registar task and return json" do
+        post tasks_path, params: { task: { url: "https://atcoder.jp/" } }
+        json = JSON.parse(response.body)
+        expect(json["message"]).to include("登録完了")
+        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:success)
+      end
+
+      it "return error json with not permitted url" do
+        post tasks_path, params: { task: { url: "https://wrong.jp/" } }
+        json = JSON.parse(response.body)
+        expect(json["messages"]).to include("許可されていないurlです。使い方画面より登録できるurlをご確認ください。")
+        expect(response).to have_http_status(400)
+      end
+
+      it "return error json when registered url size is upper limit" do
+        5000.times do
+          FactoryBot.create(:task, user_id: @user.id)
+        end
+        post tasks_path, params: { task: { url: "https://wrong.jp/" } }
+        json = JSON.parse(response.body)
+        expect(json["messages"]).to include("タスク登録件数が上限に達したため登録ができませんでした。")
+        expect(response).to have_http_status(400)
+      end
+    end
+  end
 end

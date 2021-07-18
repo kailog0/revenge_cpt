@@ -3,7 +3,8 @@
 class TasksController < ApplicationController
   protect_from_forgery except: %i[create update]
 
-  TASK_UPPER_LIMIT = 50
+  TASK_UPPER_LIMIT = 5000
+  ACCEPTABLE_URL_RE = %r{(https://atcoder.jp/|https://codeforces.com/)}
 
   def index
     if params[:solved_status].blank?
@@ -28,17 +29,22 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = Task.new(url: params[:url], user_id: current_user.id, status: 0)
+    task = Task.new(task_params.merge({ user_id: current_user.id }))
     tasks_count = Task.where(user_id: current_user).count
     error_messages = []
+
+    if task.url.match(ACCEPTABLE_URL_RE).nil?
+      error_messages.push(ErrorHelper::TASK_NOT_PERMITTED_URL_ERROR_MESSAGE)
+    end
+
     if TASK_UPPER_LIMIT <= tasks_count
       error_messages.push(ErrorHelper::TASK_UPPER_LIMIT_ERROR_MESSAGE)
     end
 
-    if TASK_UPPER_LIMIT <= tasks_count && task.save
+    if error_messages.empty? && TASK_UPPER_LIMIT > tasks_count && task.save
       render json: { message: '登録完了' }, status: 200
     else
-      render json: { messages: %w[a b] }, status: 400
+      render json: { messages: error_messages }, status: 400
     end
   end
 
