@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
+    provider { "github" }
+    uid { "password_sample" }
     name { "aoki" }
-    password { "aoki_password" }
-    admin { "false" }
   end
 end
