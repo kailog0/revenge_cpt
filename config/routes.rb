@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post '/tasks' => 'tasks#create'
   put '/tasks/:id' => 'tasks#update'
   get '/login' => 'sessions#new'
-  post '/login' => 'sessions#create'
+  get '/auth/:provider/callback' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
 
   namespace :admin do

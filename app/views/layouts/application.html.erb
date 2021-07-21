@@ -11,6 +11,20 @@
   </head>
 
   <body>
+      <header>
+        <nav>
+          <div>
+            <%= link_to 'revenge_cpt', logout_path %>
+          </div>
+          <div>
+            <% if current_user %>
+              <%= link_to 'ログアウト', logout_path, method: :delete %>
+            <% elsif %>
+              <%= link_to 'githubeでログイン', '/auth/github', method: :post %>
+            <% end %>
+          </div>
+        </nav>
+      </header>
     <%= yield %>
   </body>
 </html>
