@@ -29,7 +29,7 @@ RSpec.describe User, type: :model do
       user = FactoryBot.build(:user, name: "a" * 31)
       expect(user).to_not be_valid
     end
-    
+
     it "is invalid whitout a uid" do
       user = FactoryBot.build(:user, uid: nil)
       expect(user).to_not be_valid

@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2021_07_20_083339) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "provider", null: false
     t.string "uid", null: false
-    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
+    t.index %w[provider uid], name: "index_users_on_provider_and_uid", unique: true
   end
 
 end
