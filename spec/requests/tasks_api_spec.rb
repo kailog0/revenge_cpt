@@ -6,7 +6,7 @@ RSpec.describe "TasksApis", type: :request do
       before do
         @user = FactoryBot.create(:user, provider: "github", uid: "12345")
         Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
-        get "/auth/github/callback" 
+        get "/auth/github/callback"
       end
 
       it "return tasks json" do
@@ -48,7 +48,7 @@ RSpec.describe "TasksApis", type: :request do
       before do
         @user = FactoryBot.create(:user, provider: "github", uid: "12345")
         Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
-        get "/auth/github/callback" 
+        get "/auth/github/callback"
       end
 
       it "registar task and return json" do
