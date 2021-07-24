@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h2>一週間前に解いた問題</h2>
+            <div>
+                <table-component></table-component>
+            </div>
+        </div>
+        <div>
+            <h2>一ヵ月前に解いた問題</h2>
+            <div>
+            </div>
+        </div>
+        <div>
+            <h2>半年前に解いた問題</h2>
+
+        </div>
+        <script>
+          Vue.component('table-component', {
+              data: function() {
+                return {tasks: [
+                 {"id": 1, "url": "https://kai2020.blog"},
+                 {"id": 2, "url": "https://kai2020.blog"},
+                 {"id": 3, "url": "https://kai2020.blog"},
+                  
+                ]}
+              },
+              template: '<table>\
+                <tr><th>No.</th><th>task</th><th></th></tr>\
+                <tr v-for="(task, index) in tasks" :key="task.id">\
+                <td>{{ index + 1}}</td>\
+                <td><a :href="task.url">Hydrate</a></a></td>\
+                <td><button @click="delete_task(task.id)">AC</button></td>\
+              </tr>\
+             </table>',
+                methods: {
+                    delete_task: function(task_id) {
+                        console.log(task_id)
+                    }
+                },
+            })
+            new Vue({
+                el: '#app'
+            })
+        </script>
+        <style>
+            table {width: 500px; border-collapse:collapse }
+            tr {border: solid 1px black;}
+            td {text-align: center;}
+        </style>
+    </body>
+</html>

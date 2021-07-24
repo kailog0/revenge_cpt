@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+      <div id="app">
+        <div class="task-groups">
+          <div class="task-group-one-week">
+            <button @click="switchComponent(0)">one week</button>
+          </div>
+          <div class="task-group-one-month">
+            <button @click="switchComponent(1)">one mont</button>
+          </div>
+          <div class="task-group-half-a-year">
+            <button @click="switchComponent(2)">half a year</button>
+          </div>
+          <div class="task-group-today-ac">
+            <button>today AC</button>
+          </div>
+        </div>
+        <confirm-url-component></confirm-url-component> 
+        <div>
+          <table-component key="one~week" v-if="show_component[0]" :solved_status="0" :from_x_days_ago="20" :to_y_days_ago="0"></table-component>
+          <table-component key="one-month" v-else-if="show_component[1]" :solved_status="1" :from_x_days_ago="40" :to_y_days_ago="30"></table-component>
+          <table-component key="half-a-year" v-else-if="show_component[2]" :solved_status="2" :from_x_days_ago="200" :to_y_days_ago="180"></table-component>
+          </div>
+      </div>
+    </body>
+</html>

@@ -4,12 +4,27 @@
     <title>RebengeCpt</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
+    <%= stylesheet_pack_tag 'application' %>
+   <script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
 
   <body>
+      <header>
+        <nav>
+          <div>
+            <%= link_to 'revenge_cpt', logout_path %>
+          </div>
+          <div>
+            <% if current_user %>
+              <%= link_to 'ログアウト', logout_path, method: :delete %>
+            <% elsif %>
+              <%= link_to 'githubeでログイン', '/auth/github', method: :post %>
+            <% end %>
+          </div>
+        </nav>
+      </header>
     <%= yield %>
   </body>
 </html>

@@ -6,6 +6,9 @@
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
+require("./application.css")
+require("./reset.css")
+require("./user_vue.js")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
