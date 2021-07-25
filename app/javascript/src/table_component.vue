@@ -17,7 +17,10 @@ export default {
         to_y_days_ago: Number,
     },
     data: function() {
-        return {tasks: []}
+        return {
+            tasks: [],
+            base_url: '/tasks/'
+        }
     },
     methods: {
         update_task: function(task) {
@@ -28,7 +31,7 @@ export default {
         }
         axios
             .put(
-                `http://localhost:3000/tasks/${task.id}`,
+                this.base_url + `${task.id}`,
                 params
             )
             .then(function(response) {
@@ -52,7 +55,7 @@ export default {
         }
         axios
             .get(
-            `http://localhost:3000/tasks?solved_status=${this.solved_status}&from_x_days_ago=${this.from_x_days_ago}&to_y_days_ago=${this.to_y_days_ago}` 
+                this.base_url + `?solved_status=${this.solved_status}&from_x_days_ago=${this.from_x_days_ago}&to_y_days_ago=${this.to_y_days_ago}` 
             )
             .then(function(response) {
             self.tasks = response.data

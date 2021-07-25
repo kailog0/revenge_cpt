@@ -15,7 +15,8 @@ export default {
     data: function() {
         return {
         url: "",
-        error_messages: []
+        error_messages: [],
+        base_url:'/tasks',
         }
     },
     methods: {
@@ -24,7 +25,7 @@ export default {
         const self = this
         const params = {'url': this.url}
         axios
-            .post('http://localhost:3000/tasks', params)
+            .post(this.base_url, params)
             .then(function(response) {
             console.log(response.data.message)
             })
