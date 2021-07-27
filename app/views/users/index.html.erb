@@ -6,16 +6,16 @@
     <body>
       <div id="app">
         <div class="task-groups">
-          <div class="task-group-one-week">
+          <div class="task-group-one-week" :class="{'selected-task-group': show_component[0] }">
             <button @click="switchComponent(0)">one week</button>
           </div>
-          <div class="task-group-one-month">
+          <div class="task-group-one-month" :class="{'selected-task-group': show_component[1] }">
             <button @click="switchComponent(1)">one mont</button>
           </div>
-          <div class="task-group-half-a-year">
+          <div class="task-group-half-a-year" :class="{'selected-task-group': show_component[2] }">
             <button @click="switchComponent(2)">half a year</button>
           </div>
-          <div class="task-group-today-ac">
+          <div class="task-group-today-ac" :class="{'selected-task-group': show_component[3] }">
             <button>today AC</button>
           </div>
         </div>
