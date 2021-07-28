@@ -23,3 +23,6 @@ Style/BlockComments:
 
 Style/StringLiterals:
     Enabled: false
+
+Style/SymbolArray:
+    Enabled: false
