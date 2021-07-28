@@ -51,6 +51,9 @@
 		border-top-right-radius: 5%;
 		border-bottom-right-radius: 5%;
 	}
+	.selected-task-group {
+		background-color: rgb(50, 50, 50, 0.9);
+	}
 }
 
 @media screen and (min-width: 561px) and (max-width: 800px) {
@@ -106,6 +109,9 @@
                 border-top-right-radius: 5%;
                 border-bottom-right-radius: 5%;
         }
+	.selected-task-group {
+		background-color: rgb(50, 50, 50, 0.9);
+	}
 }
 
 @media screen and (max-width: 560px) {
@@ -160,6 +166,9 @@
                 border-top-right-radius: 5%;
                 border-bottom-right-radius: 5%;
         }
+	.selected-task-group {
+		background-color: rgb(50, 50, 50, 0.9);
+	}
 
 }
 
