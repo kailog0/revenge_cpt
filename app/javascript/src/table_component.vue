@@ -4,7 +4,11 @@
         <tr v-for="(task, index) in tasks" :key="task.id" :class="'tasks-table-tr-' + (index % 2 == 0 ? 'even' : 'odd')">
         <td class="tasks-table-td tasks-table-td-index">{{ index + 1}}</td>
         <td class="tasks-table-td"><a :href="task.url">{{  task.url }}</a></a></td>
-        <td class="tasks-table-td tasks-table-td-button"><button class="tasks-table-button" @click="update_task(task)">AC</button></td>
+        <td class="tasks-table-td tasks-table-td-button">
+            <button v-if="type == 0" class="tasks-table-button" @click="update_task(task)">AC</button>
+            <button v-else-if="type == 1" class="tasks-table-button" @click="update_task(task)">戻す</button>
+            <button v-else-if="type == 2" class="tasks-table-button" @click="update_task(task)">削除</button>
+        </td>
         </tr>
     </table>
 </template>
@@ -15,6 +19,7 @@ export default {
         solved_status: Number,
         from_x_days_ago: Number,
         to_y_days_ago: Number,
+        type: Number,
     },
     data: function() {
         return {

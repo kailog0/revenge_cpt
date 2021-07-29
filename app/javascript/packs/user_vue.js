@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new Vue({
     el: '#app',
     data: {
-        show_component: [true, false, false, false]
+        show_component: [true, false, false, false, false, false]
     },
     methods: {
 	    switchComponent: function(index) {
