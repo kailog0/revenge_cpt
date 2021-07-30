@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_20_083339) do
+ActiveRecord::Schema.define(version: 2021_07_29_134114) do
 
   create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "url", null: false
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2021_07_20_083339) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
     t.integer "status", default: 0, null: false
+    t.datetime "pre_updated_at", precision: 6
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
@@ -27,7 +28,7 @@ ActiveRecord::Schema.define(version: 2021_07_20_083339) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "provider", null: false
     t.string "uid", null: false
-    t.index %w[provider uid], name: "index_users_on_provider_and_uid", unique: true
+    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
   end
 
 end
