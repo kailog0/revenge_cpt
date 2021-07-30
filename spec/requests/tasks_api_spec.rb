@@ -88,8 +88,7 @@ RSpec.describe "TasksApis", type: :request do
 
       it "update task status, updated_at, pre_updated_at and return json" do
         before_update_task = FactoryBot.create(:task, user_id: @user.id)
-        puts before_update_task.id
-        put task_path(before_update_task.id), params: { task: { id: before_update_task.id, status: before_update_task.status + 1 } }
+        put task_path(before_update_task.id), params: { task: { id: before_update_task.id, status: before_update_task.status + 1 }, mode: 'update' }
         json = JSON.parse(response.body)
         expect(response).to have_http_status(:success)
         expect(response).to have_http_status(200)
@@ -98,6 +97,24 @@ RSpec.describe "TasksApis", type: :request do
         expect(after_update_task.status).to be(1)
         expect(after_update_task.pre_updated_at).to eq(before_update_task.updated_at)
         expect(after_update_task.updated_at).not_to eq(before_update_task.updated_at)
+      end
+
+      it "downgrade task" do
+        # create already updated task
+        task = FactoryBot.create(:task, user_id: @user.id)
+        first_updated_date = task.updated_at
+        task.update(pre_updated_at: task.updated_at, status: 1000 + task.status + 1)
+
+        # update task
+        put task_path(task.id), params: { task: { id: task.id, status: task.status - 1 }, mode: 'downgrade' }
+
+        # confirm result
+        json = JSON.parse(response.body)
+        downgraded_task = Task.find(task.id)
+        expect(response).to have_http_status(:success)
+        expect(response).to have_http_status(200)
+        expect(json["message"]).to include "更新完了しました。"
+        expect(downgraded_task.updated_at).to eq(first_updated_date)
       end
     end
   end

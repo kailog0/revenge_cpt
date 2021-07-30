@@ -6,7 +6,7 @@
         <td class="tasks-table-td"><a :href="task.url">{{  task.url }}</a></a></td>
         <td class="tasks-table-td tasks-table-td-button">
             <button v-if="type == 0" class="tasks-table-button" @click="update_task(task)">AC</button>
-            <button v-else-if="type == 1" class="tasks-table-button" @click="update_task(task)">戻す</button>
+            <button v-else-if="type == 1" class="tasks-table-button" @click="downgrade_task(task)">戻す</button>
             <button v-else-if="type == 2" class="tasks-table-button" @click="update_task(task)">削除</button>
         </td>
         </tr>
@@ -16,7 +16,7 @@
 <script>
 export default {
     props: {
-        solved_status: Number,
+        solved_status: [Number, Array],
         from_x_days_ago: Number,
         to_y_days_ago: Number,
         type: Number,
@@ -29,26 +29,55 @@ export default {
     },
     methods: {
         update_task: function(task) {
-        const self = this
-        const params = {
-            'id': task.id,
-            'status': task.status + 1,
-        }
-        axios
-            .put(
-                this.base_url + `${task.id}`,
-                params
+            const self = this
+            const params = {
+                task: {
+                  'id': task.id,
+                  'status': task.status + 1,
+                },
+                'mode': 'update',
+            }
+            axios
+                .put(
+                    this.base_url + `${task.id}`,
+                    params
+                )
+                .then(function(response) {
+                    console.log(response.data.message)
+                    self.tasks = self.tasks.filter(target => target.id != task.id)
+                })
+                .catch(function(error) {
+                    console.log('更新失敗')
+                    console.log(error.response)
+                })
+                .finally(function() {
+                  console.log('put-finally')
+            })
+        },
+        downgrade_task: function(task) {
+            const self = this
+            const params =  {
+                task: {
+                    'id': task.id,
+                    'status': task.status - 1,
+                },
+                'mode': 'downgrade',
+            }
+            axios
+                .put(
+                    this.base_url + `${task.id}`,
+                    params
             )
             .then(function(response) {
-            console.log(response.data.message)
-            self.tasks = self.tasks.filter(target => target.id != task.id)
+                console.log(response.data.message)
+                self.tasks = self.tasks.filter(target => target.id != task.id)
             })
             .catch(function(error) {
-            console.log('更新失敗')
-            console.log(error.response)
+                console.log('更新失敗')
+                console.log(error.response)
             })
             .finally(function() {
-            console.log('put-finally')
+                console.log('put-finally')
             })
         },
         get_tasks: function() {

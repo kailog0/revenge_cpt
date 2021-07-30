@@ -50,9 +50,12 @@ class TasksController < ApplicationController
 
   def update
     task = Task.find(task_params[:id])
-    task.pre_updated_at = task.updated_at
-
-    if task.update(status: task_params[:status])
+    if params[:mode] == "update"
+      attributes = task_params.merge({ pre_updated_at: task.updated_at })
+    elsif params[:mode] == "downgrade"
+      attributes = task_params.merge({ updated_at: task.pre_updated_at })
+    end
+    if task.update(attributes)
       render json: { message: '更新完了しました。' }, status: 200
     else
       render json: { message: '登録に失敗しました。' }, status: 400
