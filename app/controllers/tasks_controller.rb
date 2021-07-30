@@ -49,10 +49,11 @@ class TasksController < ApplicationController
   end
 
   def update
-    task = Task.find(params[:id])
+    task = Task.find(task_params[:id])
+    task.pre_updated_at = task.updated_at
 
-    if task.update(status: params[:status])
-      render json: { message: '更新完了しました。' }, status: 201
+    if task.update(status: task_params[:status])
+      render json: { message: '更新完了しました。' }, status: 200
     else
       render json: { message: '登録に失敗しました。' }, status: 400
     end
@@ -61,6 +62,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:url, :status)
+    params.require(:task).permit(:id, :url, :status)
   end
 end

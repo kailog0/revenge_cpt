@@ -77,4 +77,28 @@ RSpec.describe "TasksApis", type: :request do
       end
     end
   end
+
+  describe 'put /tasks_api' do
+    context 'logging in' do
+      before do
+        @user = FactoryBot.create(:user, provider: "github", uid: "12345")
+        Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
+        get "/auth/github/callback"
+      end
+
+      it "update task status, updated_at, pre_updated_at and return json" do
+        before_update_task = FactoryBot.create(:task, user_id: @user.id)
+        puts before_update_task.id
+        put task_path(before_update_task.id), params: { task: { id: before_update_task.id, status: before_update_task.status + 1 } }
+        json = JSON.parse(response.body)
+        expect(response).to have_http_status(:success)
+        expect(response).to have_http_status(200)
+        expect(json["message"]).to include("更新完了しました。")
+        after_update_task = Task.find(before_update_task.id)
+        expect(after_update_task.status).to be(1)
+        expect(after_update_task.pre_updated_at).to eq(before_update_task.updated_at)
+        expect(after_update_task.updated_at).not_to eq(before_update_task.updated_at)
+      end
+    end
+  end
 end
