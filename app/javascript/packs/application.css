@@ -30,7 +30,7 @@
 		display: flex;
 		justify-content: space-around;
 	}
-	.task-group-one-week, .task-group-one-month, .task-group-half-a-year, .task-group-today-ac {
+	.task-group-one-week, .task-group-one-month, .task-group-half-a-year, .task-group-today-ac, .task-group-today-registration {
 		color: white;
 		font-size: 20px;
 		background-color: rgb(101, 101, 101, 0.9);
@@ -46,7 +46,7 @@
 		border-top-left-radius: 5%;
 		border-bottom-left-radius: 5%;
 	}	
-	.task-group-today-ac {
+	.task-group-today-registration {
 		border-right: 1px solid black;
 		border-top-right-radius: 5%;
 		border-bottom-right-radius: 5%;
@@ -88,7 +88,7 @@
                 display: flex;
                 justify-content: space-around;
         }
-        .task-group-one-week, .task-group-one-month, .task-group-half-a-year, .task-group-today-ac {
+        .task-group-one-week, .task-group-one-month, .task-group-half-a-year, .task-group-today-ac, .task-group-today-registration {
                 color: white;
                 font-size: 20px;
                 background-color: rgb(101, 101, 101, 0.9);
@@ -104,7 +104,7 @@
                 border-top-left-radius: 5%;
                 border-bottom-left-radius: 5%;
         }
-        .task-group-today-ac {
+        .task-group-today-registration {
                 border-right: 1px solid black;
                 border-top-right-radius: 5%;
                 border-bottom-right-radius: 5%;
@@ -147,7 +147,7 @@
 		flex-direction: column;
 		justify-content: space-around;
         }
-        .task-group-one-week, .task-group-one-month, .task-group-half-a-year, .task-group-today-ac {
+        .task-group-one-week, .task-group-one-month, .task-group-half-a-year, .task-group-today-ac, .task-group-today-registration {
                 color: white;
                 font-size: 20px;
                 background-color: rgb(101, 101, 101, 0.9);
@@ -161,7 +161,7 @@
                 border-top-left-radius: 5%;
                 border-bottom-left-radius: 5%;
         }
-        .task-group-today-ac {
+        .task-group-today-registration {
                 border-right: 1px solid black;
                 border-top-right-radius: 5%;
                 border-bottom-right-radius: 5%;

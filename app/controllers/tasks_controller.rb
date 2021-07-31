@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  protect_from_forgery except: %i[create update]
+  protect_from_forgery except: %i[create update destroy]
 
   TASK_UPPER_LIMIT = 5000
   ACCEPTABLE_URL_RE = %r{(https://atcoder.jp/|https://codeforces.com/)}
@@ -49,10 +49,24 @@ class TasksController < ApplicationController
   end
 
   def update
-    task = Task.find(params[:id])
+    task = Task.find(task_params[:id])
+    if params[:mode] == "update"
+      attributes = task_params.merge({ pre_updated_at: task.updated_at })
+    elsif params[:mode] == "downgrade"
+      attributes = task_params.merge({ updated_at: task.pre_updated_at })
+    end
+    if task.update(attributes)
+      render json: { message: '更新完了しました。' }, status: 200
+    else
+      render json: { message: '登録に失敗しました。' }, status: 400
+    end
+  end
 
-    if task.update(status: params[:status])
-      render json: { message: '更新完了しました。' }, status: 201
+  def destroy
+    task = Task.find(params[:id])
+    task.destroy
+    if task.destroy
+      render json: { message: '削除完了しました。' }, status: 200
     else
       render json: { message: '登録に失敗しました。' }, status: 400
     end
@@ -61,6 +75,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:url, :status)
+    params.require(:task).permit(:id, :url, :status)
   end
 end

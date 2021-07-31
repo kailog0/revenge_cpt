@@ -1,11 +1,14 @@
 <template>
     <div class="confirm-main-box">
+        <div v-if="success_message">
+            <p>{{ success_message }} </p>
+        </div>
         <div v-if="error_messages.length">
             <p v-for="(error_message, index) in error_messages" :key="index">{{ error_message }} </p>
         </div>
         <div class="confirm-sub-box">
             <input class="confirm-input" v-model="url">
-            <button class="confirm-button" @click="confirm_url">確認</button>
+            <button class="confirm-button" :disabled="is_button_inactive" @click="confirm_url">登録</button>
         </div>
     </div>
 </template>
@@ -14,9 +17,11 @@
 export default {
     data: function() {
         return {
-        url: "",
-        error_messages: [],
-        base_url:'/tasks',
+            url: "",
+            error_messages: [],
+            success_message:  '',
+            base_url:'/tasks',
+            is_button_inactive: false
         }
     },
     methods: {
@@ -24,24 +29,27 @@ export default {
         let url = this.url
         const self = this
         const params = {'url': this.url}
+        this.reset_message()
+        this.is_button_inactive = true
         axios
             .post(this.base_url, params)
             .then(function(response) {
-            console.log(response.data.message)
+                self.success_message = response.data.message
+                self.url = ''
+                setTimeout(function() {self.success_message = ''}, 1500)
             })
             .catch(function(error) {
-            console.log(error.response)
-            console.log(error.status)
-            error.response.data.messages.forEach(function(message) {
-                self.error_messages.push(message)
-                console.log(message)
+                error.response.data.messages.forEach(function(message) {
+                    self.error_messages.push(message)
+                })
             })
+            .finally(function() {
+                setTimeout(function() {self.is_button_inactive = false}, 1500)
             })
-            .catch(function(error) {
-            console.log(error)
-            })
-            .finally(function(response) {
-            })
+        },
+        reset_message: function() {
+            this.success_message = ''
+            this. error_messages = []
         }
     }
 }
@@ -77,6 +85,9 @@ export default {
 	border-bottom-right-radius: 5%;
 	border-top-left-radius: 5%;
 	border-top-right-radius: 5%;
+    }
+    .confirm-button:disabled {
+        background-color: rgb(100, 100, 100);
     }
 }
 

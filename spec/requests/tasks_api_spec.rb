@@ -77,4 +77,69 @@ RSpec.describe "TasksApis", type: :request do
       end
     end
   end
+
+  describe 'put /tasks_api' do
+    context 'logging in' do
+      before do
+        @user = FactoryBot.create(:user, provider: "github", uid: "12345")
+        Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
+        get "/auth/github/callback"
+      end
+
+      it "update task status, updated_at, pre_updated_at and return json" do
+        before_update_task = FactoryBot.create(:task, user_id: @user.id)
+        put task_path(before_update_task.id), params: { task: { id: before_update_task.id, status: before_update_task.status + 1 }, mode: 'update' }
+        json = JSON.parse(response.body)
+        expect(response).to have_http_status(:success)
+        expect(response).to have_http_status(200)
+        expect(json["message"]).to include("更新完了しました。")
+        after_update_task = Task.find(before_update_task.id)
+        expect(after_update_task.status).to be(1)
+        expect(after_update_task.pre_updated_at).to eq(before_update_task.updated_at)
+        expect(after_update_task.updated_at).not_to eq(before_update_task.updated_at)
+      end
+
+      it "downgrade task" do
+        # create already updated task
+        task = FactoryBot.create(:task, user_id: @user.id)
+        first_updated_date = task.updated_at
+        task.update(pre_updated_at: task.updated_at, status: 1000 + task.status + 1)
+
+        # update task
+        put task_path(task.id), params: { task: { id: task.id, status: task.status - 1 }, mode: 'downgrade' }
+
+        # confirm result
+        json = JSON.parse(response.body)
+        downgraded_task = Task.find(task.id)
+        expect(response).to have_http_status(:success)
+        expect(response).to have_http_status(200)
+        expect(json["message"]).to include "更新完了しました。"
+        expect(downgraded_task.updated_at).to eq(first_updated_date)
+      end
+    end
+  end
+
+  describe 'delete /task_api' do
+    context 'logging in' do
+      before do
+        @user = FactoryBot.create(:user, provider: "github", uid: "12345")
+        Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
+        get "/auth/github/callback"
+      end
+
+      it 'delete task ans return json' do
+        # create task
+        task = FactoryBot.create(:task, user_id: @user.id, status: 2)
+
+        # delete task
+        delete task_path(task.id)
+
+        # confirm result
+        json = JSON.parse(response.body)
+        expect(response).to have_http_status(:success)
+        expect(response).to have_http_status(200)
+        expect(json['message']).to include '削除完了しました。'
+      end
+    end
+  end
 end

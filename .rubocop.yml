@@ -23,3 +23,18 @@ Style/BlockComments:
 
 Style/StringLiterals:
     Enabled: false
+
+Style/SymbolArray:
+    Enabled: false
+
+Style/WordArray:
+    Enabled: false
+
+Metrics/BlockLength:
+    Max: 150 
+
+Layout/LineLength:
+    Max: 150
+
+Style/CaseLikeIf:
+    Enabled: false

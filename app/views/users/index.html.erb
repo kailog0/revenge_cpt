@@ -10,21 +10,26 @@
             <button @click="switchComponent(0)">one week</button>
           </div>
           <div class="task-group-one-month" :class="{'selected-task-group': show_component[1] }">
-            <button @click="switchComponent(1)">one mont</button>
+            <button @click="switchComponent(1)">one month</button>
           </div>
           <div class="task-group-half-a-year" :class="{'selected-task-group': show_component[2] }">
             <button @click="switchComponent(2)">half a year</button>
           </div>
           <div class="task-group-today-ac" :class="{'selected-task-group': show_component[3] }">
-            <button>today AC</button>
+            <button @click="switchComponent(3)">today AC</button>
+          </div>
+          <div class="task-group-today-registration" :class="{'selected-task-group': show_component[4] }">
+            <button @click="switchComponent(4)">today registared</button>
           </div>
         </div>
         <confirm-url-component></confirm-url-component> 
         <div>
-          <table-component key="one~week" v-if="show_component[0]" :solved_status="0" :from_x_days_ago="20" :to_y_days_ago="0"></table-component>
-          <table-component key="one-month" v-else-if="show_component[1]" :solved_status="1" :from_x_days_ago="40" :to_y_days_ago="30"></table-component>
-          <table-component key="half-a-year" v-else-if="show_component[2]" :solved_status="2" :from_x_days_ago="200" :to_y_days_ago="180"></table-component>
-          </div>
+          <table-component key="one~week" v-if="show_component[0]" :solved_status="0" :from_x_days_ago="8" :to_y_days_ago="7" :type="0"></table-component>
+          <table-component key="one-month" v-else-if="show_component[1]" :solved_status="1" :from_x_days_ago="40" :to_y_days_ago="30" :type="0"></table-component>
+          <table-component key="half-a-year" v-else-if="show_component[2]" :solved_status="2" :from_x_days_ago="200" :to_y_days_ago="180" :type="0"></table-component>
+          <table-component key="today-ac" v-else-if="show_component[3]" :solved_status="[1, 2, 3]" :from_x_days_ago="0" :to_y_days_ago="0" :type="1"></table-component>
+          <table-component key="today-registared" v-else-if="show_component[4]" :solved_status="0" :from_x_days_ago="0" :to_y_days_ago="0" :type="2"></table-component>
+        </div>
       </div>
     </body>
 </html>
