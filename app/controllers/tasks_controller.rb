@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  protect_from_forgery except: %i[create update]
+  protect_from_forgery except: %i[create update destroy]
 
   TASK_UPPER_LIMIT = 5000
   ACCEPTABLE_URL_RE = %r{(https://atcoder.jp/|https://codeforces.com/)}
@@ -57,6 +57,16 @@ class TasksController < ApplicationController
     end
     if task.update(attributes)
       render json: { message: '更新完了しました。' }, status: 200
+    else
+      render json: { message: '登録に失敗しました。' }, status: 400
+    end
+  end
+
+  def destroy
+    task = Task.find(params[:id])
+    task.destroy
+    if task.destroy
+      render json: { message: '削除完了しました。' }, status: 200
     else
       render json: { message: '登録に失敗しました。' }, status: 400
     end

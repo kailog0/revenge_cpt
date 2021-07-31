@@ -7,7 +7,7 @@
         <td class="tasks-table-td tasks-table-td-button">
             <button v-if="type == 0" class="tasks-table-button" @click="update_task(task)">AC</button>
             <button v-else-if="type == 1" class="tasks-table-button" @click="downgrade_task(task)">戻す</button>
-            <button v-else-if="type == 2" class="tasks-table-button" @click="update_task(task)">削除</button>
+            <button v-else-if="type == 2" class="tasks-table-button" @click="delete_task(task)">削除</button>
         </td>
         </tr>
     </table>
@@ -78,6 +78,19 @@ export default {
             })
             .finally(function() {
                 console.log('put-finally')
+            })
+        },
+        delete_task: function(task) {
+            const self = this
+            axios
+                .delete(
+                    this.base_url + task.id,
+            )
+            .then(function(response) {
+                self.tasks = self.tasks.filter(target => target.id != task.id)
+            })
+            .catch(function(response) {
+                console.log("error")
             })
         },
         get_tasks: function() {
