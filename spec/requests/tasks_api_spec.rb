@@ -118,4 +118,28 @@ RSpec.describe "TasksApis", type: :request do
       end
     end
   end
+
+  describe 'delete /task_api' do
+    context 'logging in' do
+      before do
+        @user = FactoryBot.create(:user, provider: "github", uid: "12345")
+        Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
+        get "/auth/github/callback"
+      end
+
+      it 'delete task ans return json' do
+        # create task
+        task = FactoryBot.create(:task, user_id: @user.id, status: 2)
+
+        # delete task
+        delete task_path(task.id)
+
+        # confirm result
+        json = JSON.parse(response.body)
+        expect(response).to have_http_status(:success)
+        expect(response).to have_http_status(200)
+        expect(json['message']).to include '削除完了しました。'
+      end
+    end
+  end
 end
