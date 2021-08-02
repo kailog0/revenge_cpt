@@ -16,15 +16,21 @@
           <div>
             <%= link_to 'revenge cpt', root_path %>
           </div>
-          <div>
-            <% if current_user %>
-              <%= link_to 'ログアウト', logout_path, method: :delete %>
-            <% elsif %>
-              <%= link_to 'githubeでログイン', '/auth/github', method: :post %>
-            <% end %>
+          <div class="top-nav-box">
+            <ul class="top-nav-content">
+              <% if current_user %>
+                <li><%= link_to '使い方', helps_path %></li>
+                <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
+              <% elsif %>
+                <li><%= link_to 'githubeでログイン', '/auth/github', method: :post %></li>
+              <% end %>
+            </ul>
           </div>
         </nav>
       </header>
-    <%= yield %>
+      <% if current_user %>
+        <%= yield %>
+      <% else %>
+      <% end %>
   </body>
 </html>
