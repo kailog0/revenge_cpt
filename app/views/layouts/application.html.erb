@@ -25,6 +25,9 @@
           </div>
         </nav>
       </header>
-    <%= yield %>
+      <% if current_user %>
+        <%= yield %>
+      <% else %>
+      <% end %>
   </body>
 </html>
