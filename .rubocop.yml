@@ -38,3 +38,5 @@ Layout/LineLength:
 
 Style/CaseLikeIf:
     Enabled: false
+Style/EmptyMethod:
+    Enabled: false
