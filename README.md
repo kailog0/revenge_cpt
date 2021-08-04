@@ -1,24 +1,7 @@
-# README
+# revenge cpt
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+revenge cpt is a web application to help competition programmer to review tasks based on forgetting curve.
 
-Things you may want to cover:
+## App URL
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### **https://revengecpt.com/**
