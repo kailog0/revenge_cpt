@@ -22,12 +22,6 @@ class TasksController < ApplicationController
     end
   end
 
-  def show
-    tasks = { url: 'https://atcoder.jp/contests/zone2021/tasks/zone2021_a',
-              url: 'https://atcoder.jp/contests/zone2021/tasks/zone2021_b' }
-    render json: { status: 'SUCCESS', data: tasks }
-  end
-
   def create
     task = Task.new(task_params.merge({ user_id: current_user.id }))
     tasks_count = Task.where(user_id: current_user).count
